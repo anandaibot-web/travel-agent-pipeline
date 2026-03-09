@@ -1,7 +1,7 @@
-[dotenv@17.3.1] injecting env (24) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
-[dotenv@17.3.1] injecting env (0) from .env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+[dotenv@17.3.1] injecting env (24) from .env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+[dotenv@17.3.1] injecting env (0) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
 [aiService] Using provider: CLAUDE (claude-sonnet-4-6)
-[dotenv@17.3.1] injecting env (0) from .env -- tip: ⚡️ secrets for agents: https://dotenvx.com/as2
+[dotenv@17.3.1] injecting env (0) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
 🌐 Pipeline webhook listening on http://0.0.0.0:18791
    POST /pipeline  — submit images for blog generation
    GET  /health    — health check
@@ -11,15 +11,7 @@
    → ngrok http 18791  (then set PIPELINE_WEBHOOK_URL in Vercel env vars)
    → or Tailscale: http://<your-tailscale-ip>:18791
 
-Edit error: Command failed: cd /home/anandixit/vedicjourneys-site/vedicjourneys && git add -A && git commit -m "feat: edit anand/at-yama-dwar-standing-at-the-gate-of-kailash" && git push
-To https://github.com/anandaibot-web/vedicjourneys.git
- ! [rejected]        main -> main (fetch first)
-error: failed to push some refs to 'https://github.com/anandaibot-web/vedicjourneys.git'
-hint: Updates were rejected because the remote contains work that you do not
-hint: have locally. This is usually caused by another repository pushing to
-hint: the same ref. If you want to integrate the remote changes, use
-hint: 'git pull' before pushing again.
-hint: See the 'Note about fast-forwards' in 'git push --help' for details.
-
-Edit error: Command failed: cd /home/anandixit/vedicjourneys-site/vedicjourneys && git add -A && git commit -m "feat: edit anand/at-yama-dwar-standing-at-the-gate-of-kailash" && git push
-Edit error: Command failed: cd /home/anandixit/vedicjourneys-site/vedicjourneys && git add -A && git commit -m "feat: edit anand/at-yama-dwar-standing-at-the-gate-of-kailash" && git push
+Approve error: Command failed: cd /home/anandixit/vedicjourneys && git add . && git commit -m "feat: approve anand/reflections-at-yama-dwar-a-journey-through-spirit-and-mountain" && git push
+Edit error: Command failed: cd /home/anandixit/vedicjourneys && git add -A && git commit -m "feat: edit anand/at-yama-dwar-standing-at-the-gate-of-kailash" && git push
+Edit error: Command failed: cd /home/anandixit/vedicjourneys && git add -A && git commit -m "feat: edit anand/at-yama-dwar-standing-at-the-gate-of-kailash" && git push
+Edit error: Command failed: cd /home/anandixit/vedicjourneys && git add -A && git commit -m "feat: edit anand/at-yama-dwar-standing-at-the-gate-of-kailash" && git push

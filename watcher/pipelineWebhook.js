@@ -152,7 +152,7 @@ const server = http.createServer(async (req, res) => {
       const { execSync } = require('child_process');
       const repoRoot = path.join(__dirname, '../../vedicjourneys');
       execSync(`cd ${repoRoot} && git add . && git commit -m "feat: approve ${userHandle}/${slug}" && git push`, { stdio: 'pipe' });
-      console.log(`✅ Approved and published: ${userHandle}/${slug}`);
+	  console.log(`✅ Approved and published: ${userHandle}/${slug}`);
 
       const url = `${SITE_BASE_URL}/u/${userHandle}/${slug}`;
       return json(res, 200, { ok: true, url });
@@ -256,7 +256,7 @@ const server = http.createServer(async (req, res) => {
 
       const { execSync } = require('child_process');
       const repoRoot = path.join(__dirname, '../../vedicjourneys');
-      execSync(`cd ${repoRoot} && git add -A && git commit -m "chore: remove ${userHandle}/${slug}" && git push`, { stdio: 'pipe' });
+      execSync(`cd ${repoRoot} && git add -A && git diff --cached --quiet || git commit -m "chore: remove ${userHandle}/${slug}" && git push`, { stdio: 'pipe' });
       console.log(`🗑️  Removed: ${userHandle}/${slug}`);
 
       return json(res, 200, { ok: true });
@@ -304,8 +304,8 @@ const server = http.createServer(async (req, res) => {
 
       const { execSync } = require('child_process');
       const repoRoot = path.join(__dirname, '../../vedicjourneys');
-      execSync(`cd ${repoRoot} && git add -A && git commit -m "feat: edit ${userHandle}/${slug}" && git push`, { stdio: 'pipe' });
-      console.log(`✏️  Edited: ${userHandle}/${slug}`);
+      execSync(`cd ${repoRoot} && git add -A && git diff --cached --quiet || git commit -m "feat: edit ${userHandle}/${slug}" && git push`, { stdio: 'pipe' });
+	  console.log(`✏️  Edited: ${userHandle}/${slug}`);
 
       return json(res, 200, { ok: true });
     } catch (err) {
