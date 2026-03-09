@@ -234,6 +234,86 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
+  // ── Review: Remove (delete published post) ──────────────────────────────
+  if (req.url === '/review/remove' && req.method === 'POST') {
+    let body;
+    try { body = await readBody(req); } catch { return json(res, 400, { error: 'Invalid JSON' }); }
+
+    const { slug, userHandle } = body;
+    if (!slug || !userHandle) return json(res, 400, { error: 'slug and userHandle required' });
+
+    const BLOG_ROOT = process.env.ASTRO_BLOG_ROOT ||
+      path.join(__dirname, '../../vedicjourneys-site/vedicjourneys/src/content/blog');
+
+    const filePath = path.join(BLOG_ROOT, userHandle, `${slug}.md`);
+
+    if (!fs.existsSync(filePath)) {
+      return json(res, 404, { error: 'Post not found' });
+    }
+
+    try {
+      fs.unlinkSync(filePath);
+
+      const { execSync } = require('child_process');
+      const repoRoot = path.join(__dirname, '../../vedicjourneys-site/vedicjourneys');
+      execSync(`cd ${repoRoot} && git add -A && git commit -m "chore: remove ${userHandle}/${slug}" && git push`, { stdio: 'pipe' });
+      console.log(`🗑️  Removed: ${userHandle}/${slug}`);
+
+      return json(res, 200, { ok: true });
+    } catch (err) {
+      console.error('Remove error:', err.message);
+      return json(res, 500, { error: err.message });
+    }
+  }
+
+  // ── Review: Edit (update frontmatter fields and/or body) ─────────────────
+  if (req.url === '/review/edit' && req.method === 'POST') {
+    let body;
+    try { body = await readBody(req); } catch { return json(res, 400, { error: 'Invalid JSON' }); }
+
+    const { slug, userHandle, title, description, location, visibility, body: newBody } = body;
+    if (!slug || !userHandle) return json(res, 400, { error: 'slug and userHandle required' });
+
+    const BLOG_ROOT = process.env.ASTRO_BLOG_ROOT ||
+      path.join(__dirname, '../../vedicjourneys-site/vedicjourneys/src/content/blog');
+
+    const filePath = path.join(BLOG_ROOT, userHandle, `${slug}.md`);
+
+    if (!fs.existsSync(filePath)) {
+      return json(res, 404, { error: 'Post not found' });
+    }
+
+    try {
+      let raw = fs.readFileSync(filePath, 'utf8');
+
+      // Update frontmatter fields
+      if (title !== undefined)       raw = raw.replace(/^title:.*$/m,       `title: "${title.replace(/"/g, '\\"')}"`);
+      if (description !== undefined) raw = raw.replace(/^description:.*$/m, `description: "${description.replace(/"/g, '\\"')}"`);
+      if (location !== undefined)    raw = raw.replace(/^location:.*$/m,    `location: "${location.replace(/"/g, '\\"')}"`);
+      if (visibility !== undefined)  raw = raw.replace(/^visibility:.*$/m,  `visibility: "${visibility}"`);
+
+      // Replace body (everything after the closing --- of frontmatter)
+      if (newBody !== undefined) {
+        const fmEnd = raw.indexOf('---', raw.indexOf('---') + 3);
+        if (fmEnd !== -1) {
+          raw = raw.slice(0, fmEnd + 3) + '\n\n' + newBody;
+        }
+      }
+
+      fs.writeFileSync(filePath, raw);
+
+      const { execSync } = require('child_process');
+      const repoRoot = path.join(__dirname, '../../vedicjourneys-site/vedicjourneys');
+      execSync(`cd ${repoRoot} && git add -A && git commit -m "feat: edit ${userHandle}/${slug}" && git push`, { stdio: 'pipe' });
+      console.log(`✏️  Edited: ${userHandle}/${slug}`);
+
+      return json(res, 200, { ok: true });
+    } catch (err) {
+      console.error('Edit error:', err.message);
+      return json(res, 500, { error: err.message });
+    }
+  }
+
   json(res, 404, { error: 'Not found' });
 });
 
