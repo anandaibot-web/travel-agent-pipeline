@@ -138,13 +138,13 @@ Coordinates: ${primaryExif?.latitude ?? "?"}, ${primaryExif?.longitude ?? "?"}
 
 Visual scene analysis:
 - Location type: ${visualAnalysis.location_type}
-- Key elements present: ${visualAnalysis.dominant_elements.join(", ")}
+- Key elements present: ${(visualAnalysis.dominant_elements || []).join(", ")}
 - Water present: ${visualAnalysis.water_presence}
 - Notable mountains: ${visualAnalysis.notable_mountains || "none identified"}
 - Sky: ${visualAnalysis.sky_conditions}
 - Human activity: ${visualAnalysis.human_activity}
 - Mood/atmosphere: ${visualAnalysis.mood}
-- Specific details: ${visualAnalysis.specific_visual_details.join(", ")}
+- Specific details: ${(visualAnalysis.specific_visual_details || []).join(", ")}
 
 Personal trip context:
 ${metadataText}

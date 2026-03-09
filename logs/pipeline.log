@@ -1,7 +1,7 @@
 [dotenv@17.3.1] injecting env (24) from .env -- tip: ⚡️ secrets for agents: https://dotenvx.com/as2
 [dotenv@17.3.1] injecting env (0) from .env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
 [aiService] Using provider: OPENAI (gpt-4o-mini)
-[dotenv@17.3.1] injecting env (0) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+[dotenv@17.3.1] injecting env (0) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
 🌐 Pipeline webhook listening on http://0.0.0.0:18791
    POST /pipeline  — submit images for blog generation
    GET  /health    — health check
@@ -12,36 +12,7 @@
    → or Tailscale: http://<your-tailscale-ip>:18791
 
 
-🌐 Web submission | @anand | 1 image(s)
-   Trip: japan. tokyo
-   Context: 📍 Location: japan. tokyo
-📅 Date: 2025-04-02…
-─────────────────────────────────────────
-📸 Pipeline start | trip: japan. tokyo | user: @anand
-📷 EXIF: date=2025-03-23 lat=35.659349999999996 lon=139.700875 alt=52.5m
-📍 Context: location="japan. tokyo" year="2025" confidence=medium [whatsapp-reply]
-🌍 GPS-resolved location: Shibuya, Japan
-📅 pubDate: 2025-03-23
-🔍 Running visual analysis...
-✍️  Generating blog post...
-⚠️  Word count 766 is below target of 950 — post will pass but consider regenerating.
-
-🔍 Quality: ✅ PASSED (score: 100/100)
-🖼️  Hero image saved: /home/anandixit/vedicjourneys/public/blog-images/anand/a-pilgrimage-to-the-heart-of-shibuya-embracing-urban-spirit.jpg
-
-✅ Post written: /home/anandixit/vedicjourneys/src/content/blog/anand/a-pilgrimage-to-the-heart-of-shibuya-embracing-urban-spirit.md
-git add: (no output)
-git commit: [main f295987] feat: publish anand/a-pilgrimage-to-the-heart-of-shibuya-embracing-urban-spirit
- 2 files changed, 46 insertions(+)
- create mode 100644 public/blog-images/anand/a-pilgrimage-to-the-heart-of-shibuya-embracing-urban-spirit.jpg
- create mode 100644 src/content/blog/anand/a-pilgrimage-to-the-heart-of-shibuya-embracing-urban-spirit.md
-git push: (no output)
-🚀 Git push complete — Vercel deploy triggered.
-─────────────────────────────────────────
-
-✅ Web submission complete: https://vedicjourneys.vercel.app/u/anand/a-pilgrimage-to-the-heart-of-shibuya-embracing-urban-spirit
-
-🌐 Web submission | @anand | 6 image(s)
+🌐 Web submission | @anand | 5 image(s)
    Trip: japan. tokyo
    Context: 📍 Location: japan. tokyo, kyoto, nara, Sakoora April 2025
 📅 Date: 2025-04-02
