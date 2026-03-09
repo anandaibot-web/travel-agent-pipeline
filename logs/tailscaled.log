@@ -1,0 +1,12 @@
+TPM: error opening: stat /dev/tpmrm0: no such file or directory
+2026/03/06 12:46:58 logtail started
+2026/03/06 12:46:58 Program starting: v1.94.2-t0a29cf18b-g3f044c9f6, Go 1.25.5: []string{"tailscaled", "--state=/var/lib/tailscale/tailscaled.state", "--socket=/var/run/tailscale/tailscaled.sock"}
+2026/03/06 12:46:58 LogID: 38b6141b45f277d817f86ac23adf4499e8de6ad7a3a0c41036e8c521e203e5ab
+2026/03/06 12:46:58 logpolicy: using system state directory "/var/lib/tailscale"
+2026/03/06 12:46:58 dns: [rc=unknown ret=direct]
+2026/03/06 12:46:58 dns: using "direct" mode
+2026/03/06 12:46:58 dns: using *dns.directManager
+2026/03/06 12:46:58 dns: inotify: NewDirWatcher: context canceled
+2026/03/06 12:46:59 flushing log.
+2026/03/06 12:46:59 logger closing down
+2026/03/06 12:46:59 safesocket.Listen: /var/run/tailscale/tailscaled.sock: address already in use

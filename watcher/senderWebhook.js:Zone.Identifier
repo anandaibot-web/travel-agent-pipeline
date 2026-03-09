@@ -1,0 +1,4 @@
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=https://claude.ai/chat/7e4bb466-f564-4b4a-8d28-132e014a52bb
+HostUrl=https://claude.ai/api/organizations/85ef2134-3643-468b-9db4-3af5fee3f0be/conversations/7e4bb466-f564-4b4a-8d28-132e014a52bb/wiggle/download-file?path=%2Fmnt%2Fuser-data%2Foutputs%2FsenderWebhook.js
