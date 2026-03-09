@@ -134,7 +134,7 @@ const server = http.createServer(async (req, res) => {
     if (!slug || !userHandle) return json(res, 400, { error: 'slug and userHandle required' });
 
     const BLOG_ROOT = process.env.ASTRO_BLOG_ROOT ||
-      path.join(__dirname, '../../vedicjourneys-site/vedicjourneys/src/content/blog');
+      path.join(__dirname, '../../vedicjourneys/src/content/blog');
 
     const reviewPath = path.join(BLOG_ROOT, '_review', userHandle, `${slug}.md`);
     const publishPath = path.join(BLOG_ROOT, userHandle, `${slug}.md`);
@@ -150,7 +150,7 @@ const server = http.createServer(async (req, res) => {
 
       // Git push
       const { execSync } = require('child_process');
-      const repoRoot = path.join(__dirname, '../../vedicjourneys-site/vedicjourneys');
+      const repoRoot = path.join(__dirname, '../../vedicjourneys');
       execSync(`cd ${repoRoot} && git add . && git commit -m "feat: approve ${userHandle}/${slug}" && git push`, { stdio: 'pipe' });
       console.log(`✅ Approved and published: ${userHandle}/${slug}`);
 
@@ -171,7 +171,7 @@ const server = http.createServer(async (req, res) => {
     if (!slug || !userHandle) return json(res, 400, { error: 'slug and userHandle required' });
 
     const BLOG_ROOT = process.env.ASTRO_BLOG_ROOT ||
-      path.join(__dirname, '../../vedicjourneys-site/vedicjourneys/src/content/blog');
+      path.join(__dirname, '../../vedicjourneys/src/content/blog');
 
     const reviewPath = path.join(BLOG_ROOT, '_review', userHandle, `${slug}.md`);
 
@@ -183,11 +183,11 @@ const server = http.createServer(async (req, res) => {
       fs.unlinkSync(reviewPath);
 
       // Also remove hero image if present
-      const heroPath = path.join(__dirname, '../../vedicjourneys-site/vedicjourneys/public/blog-images', userHandle, `${slug}.jpg`);
+      const heroPath = path.join(__dirname, '../../vedicjourneys/public/blog-images', userHandle, `${slug}.jpg`);
       if (fs.existsSync(heroPath)) fs.unlinkSync(heroPath);
 
       const { execSync } = require('child_process');
-      const repoRoot = path.join(__dirname, '../../vedicjourneys-site/vedicjourneys');
+      const repoRoot = path.join(__dirname, '../../vedicjourneys');
       execSync(`cd ${repoRoot} && git add . && git commit -m "chore: reject ${userHandle}/${slug}" && git push`, { stdio: 'pipe' });
       console.log(`🗑️  Rejected and deleted: ${userHandle}/${slug}`);
 
@@ -209,7 +209,7 @@ const server = http.createServer(async (req, res) => {
     }
 
     const BLOG_ROOT = process.env.ASTRO_BLOG_ROOT ||
-      path.join(__dirname, '../../vedicjourneys-site/vedicjourneys/src/content/blog');
+      path.join(__dirname, '../../vedicjourneys/src/content/blog');
 
     const publishPath = path.join(BLOG_ROOT, userHandle, `${slug}.md`);
 
@@ -223,7 +223,7 @@ const server = http.createServer(async (req, res) => {
       fs.writeFileSync(publishPath, updated);
 
       const { execSync } = require('child_process');
-      const repoRoot = path.join(__dirname, '../../vedicjourneys-site/vedicjourneys');
+      const repoRoot = path.join(__dirname, '../../vedicjourneys');
       execSync(`cd ${repoRoot} && git add . && git commit -m "feat: set-${visibility} ${userHandle}/${slug}" && git push`, { stdio: 'pipe' });
       console.log(`🔁 Visibility updated: ${userHandle}/${slug} → ${visibility}`);
 
@@ -243,7 +243,7 @@ const server = http.createServer(async (req, res) => {
     if (!slug || !userHandle) return json(res, 400, { error: 'slug and userHandle required' });
 
     const BLOG_ROOT = process.env.ASTRO_BLOG_ROOT ||
-      path.join(__dirname, '../../vedicjourneys-site/vedicjourneys/src/content/blog');
+      path.join(__dirname, '../../vedicjourneys/src/content/blog');
 
     const filePath = path.join(BLOG_ROOT, userHandle, `${slug}.md`);
 
@@ -255,7 +255,7 @@ const server = http.createServer(async (req, res) => {
       fs.unlinkSync(filePath);
 
       const { execSync } = require('child_process');
-      const repoRoot = path.join(__dirname, '../../vedicjourneys-site/vedicjourneys');
+      const repoRoot = path.join(__dirname, '../../vedicjourneys');
       execSync(`cd ${repoRoot} && git add -A && git commit -m "chore: remove ${userHandle}/${slug}" && git push`, { stdio: 'pipe' });
       console.log(`🗑️  Removed: ${userHandle}/${slug}`);
 
@@ -275,7 +275,7 @@ const server = http.createServer(async (req, res) => {
     if (!slug || !userHandle) return json(res, 400, { error: 'slug and userHandle required' });
 
     const BLOG_ROOT = process.env.ASTRO_BLOG_ROOT ||
-      path.join(__dirname, '../../vedicjourneys-site/vedicjourneys/src/content/blog');
+      path.join(__dirname, '../../vedicjourneys/src/content/blog');
 
     const filePath = path.join(BLOG_ROOT, userHandle, `${slug}.md`);
 
@@ -303,7 +303,7 @@ const server = http.createServer(async (req, res) => {
       fs.writeFileSync(filePath, raw);
 
       const { execSync } = require('child_process');
-      const repoRoot = path.join(__dirname, '../../vedicjourneys-site/vedicjourneys');
+      const repoRoot = path.join(__dirname, '../../vedicjourneys');
       execSync(`cd ${repoRoot} && git add -A && git commit -m "feat: edit ${userHandle}/${slug}" && git push`, { stdio: 'pipe' });
       console.log(`✏️  Edited: ${userHandle}/${slug}`);
 
