@@ -1,7 +1,7 @@
 [dotenv@17.3.1] injecting env (24) from .env -- tip: ⚡️ secrets for agents: https://dotenvx.com/as2
-[dotenv@17.3.1] injecting env (0) from .env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+[dotenv@17.3.1] injecting env (0) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
 [aiService] Using provider: OPENAI (gpt-4o-mini)
-[dotenv@17.3.1] injecting env (0) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+[dotenv@17.3.1] injecting env (0) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
 🌐 Pipeline webhook listening on http://0.0.0.0:18791
    POST /pipeline  — submit images for blog generation
    GET  /health    — health check
@@ -25,19 +25,10 @@
 📅 pubDate: 2025-03-23
 🔍 Running visual analysis...
 ✍️  Generating blog post...
-❌ Pipeline error: Cannot read properties of undefined (reading 'join')
-
-🌐 Web submission | @anand | 5 image(s)
-   Trip: japan. tokyo
-   Context: 📍 Location: japan. tokyo, kyoto, nara, Sakoora April 2025
-📅 Date: 2025-04-02
-�…
-─────────────────────────────────────────
-📸 Pipeline start | trip: japan. tokyo | user: @anand
-📷 EXIF: date=2025-03-23 lat=35.659349999999996 lon=139.700875 alt=52.5m
-📍 Context: location="japan. tokyo, kyoto, nara, Sakoora April 2025" year="2025" confidence=high [whatsapp-reply]
-🌍 GPS-resolved location: Shibuya, Japan
-📅 pubDate: 2025-03-23
-🔍 Running visual analysis...
-✍️  Generating blog post...
-❌ Pipeline error: Cannot read properties of undefined (reading 'join')
+❌ AI returned invalid JSON: {
+  "title": "Pilgrimage in Shibuya: Embracing Urban Spirit",
+  "meta_description": "Explore the immersive pilgrimage journey through Shibuya, Japan, reflecting on the fusion of nature and urban energy.",
+  "keywords": ["Shibuya", "pilgrimage", "spiritual journey", "urban energy", "Japan"],
+  "markd
+🔄 Retrying blog generation...
+❌ Pipeline error: Unterminated string in JSON at position 4943 (line 5 column 4643)

@@ -45,7 +45,7 @@ Do not write narrative. Only factual visual analysis.
   if (PROVIDER === "claude") {
     const response = await anthropic.messages.create({
       model: CLAUDE_MODEL,
-      max_tokens: 1024,
+      max_tokens: 2048,
       messages: [
         {
           role: "user",
@@ -204,7 +204,8 @@ Something true and specific to this place and this moment. Under 150 words.
 QUALITY STANDARDS
 ═══════════════════════════════════════
 
-Length: 950–1100 words total across all sections.
+Length: 700–900 words total across all sections.
+Keep JSON response concise to avoid truncation.
 Tone: Grounded. Sensory. Honest. Poetic only when earned by specificity.
 Forbidden phrases: "life-changing", "soul awakening", "transformative experience",
 "eternal bliss", "mystical journey", "spiritual awakening", "once in a lifetime".
