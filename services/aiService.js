@@ -8,7 +8,7 @@ const PROVIDER = (process.env.AI_PROVIDER || "openai").toLowerCase();
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
-const OPENAI_MODEL = "gpt-4o";
+const OPENAI_MODEL = "gpt-4o-mini";
 const CLAUDE_MODEL = "claude-sonnet-4-6";
 
 console.log(`[aiService] Using provider: ${PROVIDER.toUpperCase()} (${PROVIDER === "claude" ? CLAUDE_MODEL : OPENAI_MODEL})`);

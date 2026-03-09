@@ -30,7 +30,7 @@ const { sendWhatsAppMessage, messages } = require("../services/whatsappService")
 
 const SITE_BLOG_ROOT =
   process.env.ASTRO_BLOG_ROOT ||
-  "/home/anandixit/vedicjourneys-site/vedicjourneys/src/content/blog";
+  "/home/anandixit/vedicjourneys/src/content/blog";
 
 const SITE_BASE_URL =
   process.env.SITE_BASE_URL || "https://vedicjourneys.vercel.app";
@@ -40,12 +40,12 @@ const ENABLE_GIT_PUSH = process.env.ENABLE_GIT_PUSH === "true";
 
 const ASTRO_GIT_ROOT =
   process.env.ASTRO_GIT_ROOT ||
-  "/home/anandixit/vedicjourneys-site/vedicjourneys";
+  "/home/anandixit/vedicjourneys";
 
 // Where Astro serves static files from — images go here
 const ASTRO_PUBLIC_ROOT =
   process.env.ASTRO_PUBLIC_ROOT ||
-  "/home/anandixit/vedicjourneys-site/vedicjourneys/public";
+  "/home/anandixit/vedicjourneys/public";
 
 const INBOUND_DIR =
   process.env.OPENCLAW_MEDIA_DIR ||
