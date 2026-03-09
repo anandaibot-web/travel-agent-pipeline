@@ -1,0 +1,159 @@
+[dotenv@17.3.1] injecting env (24) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+[dotenv@17.3.1] injecting env (0) from .env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+[aiService] Using provider: CLAUDE (claude-sonnet-4-6)
+[dotenv@17.3.1] injecting env (0) from .env -- tip: 🤖 agentic secret storage: https://dotenvx.com/as2
+🌐 Pipeline webhook listening on http://0.0.0.0:18791
+   POST /pipeline  — submit images for blog generation
+   GET  /health    — health check
+   Secret: VedicJ@2609
+
+   To expose to Vercel:
+   → ngrok http 18791  (then set PIPELINE_WEBHOOK_URL in Vercel env vars)
+   → or Tailscale: http://<your-tailscale-ip>:18791
+
+
+🌐 Web submission | @anand | 1 image(s)
+   Trip: Mt Kailash
+   Context: 📍 Location: Mt Kailash
+📅 Date: 2025-07-04
+✍️ One line: Breath taking view of t…
+─────────────────────────────────────────
+📸 Pipeline start | trip: Mt Kailash | user: @anand
+⚠️  No EXIF — WhatsApp stripped it. Using context fallbacks.
+📍 Context: location="Mt Kailash" year="2025" confidence=high [whatsapp-reply]
+🗂️  Context location: Mt Kailash
+📅 pubDate: 2025-01-01
+🔍 Running visual analysis...
+✍️  Generating blog post...
+No EXIF data found. Using folder naming fallback.
+
+🔍 Quality: ✅ PASSED (score: 100/100)
+🖼️  Hero image saved: /home/anandixit/vedicjourneys-site/vedicjourneys/public/blog-images/anand/at-the-feet-of-kailash-the-yak-the-valley-the-mountain.jpg
+
+✅ Post written: /home/anandixit/vedicjourneys-site/vedicjourneys/src/content/blog/anand/at-the-feet-of-kailash-the-yak-the-valley-the-mountain.md
+git add: (no output)
+git commit: [main 4dab890] feat: publish anand/at-the-feet-of-kailash-the-yak-the-valley-the-mountain
+ 2 files changed, 79 insertions(+)
+ create mode 100644 public/blog-images/anand/at-the-feet-of-kailash-the-yak-the-valley-the-mountain.jpg
+ create mode 100644 src/content/blog/anand/at-the-feet-of-kailash-the-yak-the-valley-the-mountain.md
+git push: (no output)
+🚀 Git push complete — Vercel deploy triggered.
+─────────────────────────────────────────
+
+✅ Web submission complete: https://vedicjourneys.vercel.app/u/anand/at-the-feet-of-kailash-the-yak-the-valley-the-mountain
+
+🌐 Web submission | @vidya | 1 image(s)
+   Trip: Lhasa
+   Context: 📍 Location: Lhasa
+📅 Date: 2025-07-10
+✍️ One line: Lhasa Portal Palace is histo…
+─────────────────────────────────────────
+📸 Pipeline start | trip: Lhasa | user: @vidya
+📷 EXIF: date=2025-07-09 lat=29.658113888888888 lon=91.1177861111111 alt=3649.5m
+📍 Context: location="Lhasa, Tibet" year="2025" confidence=high [whatsapp-reply]
+🌍 GPS-resolved location: Lhasa, Tibet
+📅 pubDate: 2025-07-09
+🔍 Running visual analysis...
+✍️  Generating blog post...
+
+🔍 Quality: ⚠️  FLAGGED (score: 55/100)
+   · Missing section: ## Introduction
+   · Missing section: ## Inner Reflection
+   · Missing section: ## Closing Reflection
+🖼️  Hero image saved: /home/anandixit/vedicjourneys-site/vedicjourneys/public/blog-images/vidya/potala-palace-lhasa-a-pilgrimage-at-3650-metres.jpg
+
+⚠️  Flagged — written to _review: /home/anandixit/vedicjourneys-site/vedicjourneys/src/content/blog/_review/vidya/potala-palace-lhasa-a-pilgrimage-at-3650-metres.md
+─────────────────────────────────────────
+
+✅ Web submission complete: https://vedicjourneys.vercel.app/u/vidya/potala-palace-lhasa-a-pilgrimage-at-3650-metres
+
+🌐 Web submission | @anand | 1 image(s)
+   Trip: Tibet
+   Context: 📍 Location: Tibet
+📅 Date: 2025-07-10
+✍️ One line: Potala palace in Lhasa
+💭 Re…
+─────────────────────────────────────────
+📸 Pipeline start | trip: Tibet | user: @anand
+📷 EXIF: date=2025-07-09 lat=29.656791666666667 lon=91.11941666666667 alt=3618.5m
+📍 Context: location="Tibet" year="2025" confidence=high [whatsapp-reply]
+🌍 GPS-resolved location: Lhasa, Tibet
+📅 pubDate: 2025-07-09
+🔍 Running visual analysis...
+✍️  Generating blog post...
+
+🔍 Quality: ✅ PASSED (score: 100/100)
+🖼️  Hero image saved: /home/anandixit/vedicjourneys-site/vedicjourneys/public/blog-images/anand/at-the-foot-of-potala-palace-lhasa-tibet.jpg
+
+✅ Post written: /home/anandixit/vedicjourneys-site/vedicjourneys/src/content/blog/anand/at-the-foot-of-potala-palace-lhasa-tibet.md
+git add: (no output)
+git commit: [main c6498a7] feat: publish anand/at-the-foot-of-potala-palace-lhasa-tibet
+ 4 files changed, 144 insertions(+)
+ create mode 100644 public/blog-images/anand/at-the-foot-of-potala-palace-lhasa-tibet.jpg
+ create mode 100644 public/blog-images/vidya/potala-palace-lhasa-a-pilgrimage-at-3650-metres.jpg
+ create mode 100644 src/content/blog/_review/vidya/potala-palace-lhasa-a-pilgrimage-at-3650-metres.md
+ create mode 100644 src/content/blog/anand/at-the-foot-of-potala-palace-lhasa-tibet.md
+git push: (no output)
+🚀 Git push complete — Vercel deploy triggered.
+─────────────────────────────────────────
+
+✅ Web submission complete: https://vedicjourneys.vercel.app/u/anand/at-the-foot-of-potala-palace-lhasa-tibet
+
+🌐 Web submission | @anand | 1 image(s)
+   Trip: Tibet
+   Context: 📍 Location: Tibet
+📅 Date: 2025-07-10
+✍️ One line: Potala palace in Lhasa
+💭 Re…
+─────────────────────────────────────────
+📸 Pipeline start | trip: Tibet | user: @anand
+📷 EXIF: date=2025-07-09 lat=29.656791666666667 lon=91.11941666666667 alt=3618.5m
+📍 Context: location="Tibet" year="2025" confidence=high [whatsapp-reply]
+🌍 GPS-resolved location: Lhasa, Tibet
+📅 pubDate: 2025-07-09
+🔍 Running visual analysis...
+✍️  Generating blog post...
+
+🔍 Quality: ✅ PASSED (score: 100/100)
+🖼️  Hero image saved: /home/anandixit/vedicjourneys-site/vedicjourneys/public/blog-images/anand/inside-the-potala-palace-lhasa-at-3618m.jpg
+
+✅ Post written: /home/anandixit/vedicjourneys-site/vedicjourneys/src/content/blog/anand/inside-the-potala-palace-lhasa-at-3618m.md
+git add: (no output)
+git commit: [main 31ba4c0] feat: publish anand/inside-the-potala-palace-lhasa-at-3618m
+ 2 files changed, 71 insertions(+)
+ create mode 100644 public/blog-images/anand/inside-the-potala-palace-lhasa-at-3618m.jpg
+ create mode 100644 src/content/blog/anand/inside-the-potala-palace-lhasa-at-3618m.md
+git push: (no output)
+🚀 Git push complete — Vercel deploy triggered.
+─────────────────────────────────────────
+
+✅ Web submission complete: https://vedicjourneys.vercel.app/u/anand/inside-the-potala-palace-lhasa-at-3618m
+
+🌐 Web submission | @anand | 1 image(s)
+   Trip: Manasarovar
+   Context: 📍 Location: Manasarovar, Tibet
+📅 Date: 2025-07-09
+✍️ One line: Rainbow near th…
+─────────────────────────────────────────
+📸 Pipeline start | trip: Manasarovar | user: @anand
+📷 EXIF: date=2025-07-03 lat=30.969880555555555 lon=81.28529444444445 alt=nullm
+📍 Context: location="Manasarovar Lake, Tibet" year="2025" confidence=high [whatsapp-reply]
+🌍 GPS-resolved location: Darchen, Tibet
+📅 pubDate: 2025-07-03
+🔍 Running visual analysis...
+✍️  Generating blog post...
+
+🔍 Quality: ✅ PASSED (score: 100/100)
+🖼️  Hero image saved: /home/anandixit/vedicjourneys-site/vedicjourneys/public/blog-images/anand/rainbow-over-darchen-waiting-at-the-gate-of-kailash.jpg
+
+✅ Post written: /home/anandixit/vedicjourneys-site/vedicjourneys/src/content/blog/anand/rainbow-over-darchen-waiting-at-the-gate-of-kailash.md
+git add: (no output)
+git commit: [main b879e12] feat: publish anand/rainbow-over-darchen-waiting-at-the-gate-of-kailash
+ 2 files changed, 65 insertions(+)
+ create mode 100644 public/blog-images/anand/rainbow-over-darchen-waiting-at-the-gate-of-kailash.jpg
+ create mode 100644 src/content/blog/anand/rainbow-over-darchen-waiting-at-the-gate-of-kailash.md
+git push: (no output)
+🚀 Git push complete — Vercel deploy triggered.
+─────────────────────────────────────────
+
+✅ Web submission complete: https://vedicjourneys.vercel.app/u/anand/rainbow-over-darchen-waiting-at-the-gate-of-kailash
