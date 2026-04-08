@@ -242,14 +242,12 @@ async function runPipelineForWhatsApp({
   }
 
   // ── Step 5: Resolve publication date ────────────────────────────────────
-  let pubDate;
-  if (primaryExif?.dateTaken) {
-    pubDate = primaryExif.dateTaken.toISOString().slice(0, 10);
-  } else if (tripContext.pubDateStr) {
-    pubDate = tripContext.pubDateStr;
-  } else {
-    pubDate = new Date().toISOString().slice(0, 10);
-  }
+  const pubDate = primaryExif?.dateTaken
+  ? primaryExif.dateTaken.toISOString().slice(0, 10)
+  : metadata?.date
+  ? metadata.date.slice(0, 10)   // uses 2025-11-02 from your web form
+  : new Date().toISOString().slice(0, 10);
+  
   console.log("📅 pubDate:", pubDate);
 
   // ── Step 6: Visual analysis ──────────────────────────────────────────────

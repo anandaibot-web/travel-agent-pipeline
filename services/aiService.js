@@ -93,137 +93,152 @@ async function generateTravelBlog(images, tripName, metadata, existingPosts, vis
   if (!primaryExif) {
     console.log("No EXIF data found. Using folder naming fallback.");
   }
+  // ── BUILD METADATA BLOCK ─────────────────────────────────────────────────────
+	// Collect every field the web form may send. Nothing is dropped silently.
+	const hasSpecialEvent = metadata?.one_line || metadata?.personal_reflection || metadata?.intention;
 
-  const metadataText = metadata
-    ? `
-Location: ${metadata.location || ""}
-Year: ${metadata.year || ""}
-Personal Reflection: ${metadata.personal_reflection || ""}
-Physical Challenge: ${metadata.physical_challenge || ""}
-Intention: ${metadata.intention || ""}
-`
-    : "No additional personal metadata provided.";
+	const metadataText = metadata ? `
+	Location (writer-provided):    ${metadata.location || ""}
+	Date of visit (writer-provided): ${metadata.date || metadata.year || ""}
+	One-line highlight:            ${metadata.one_line || ""}
+	Personal reflection:           ${metadata.personal_reflection || ""}
+	Physical / emotional challenge: ${metadata.physical_challenge || ""}
+	Journey intention:              ${metadata.intention || ""}
+	`.trim() : null;
+
 
   const promptText = `
-You are a reflective travel writer and spiritual diarist. Your task is to write a deeply immersive,
-first-person blog post about a pilgrimage journey. You write from INSIDE the experience —
-not from outside the photograph.
+	You are a reflective travel writer and spiritual diarist. Your task is to write a deeply immersive,
+	first-person blog post about a pilgrimage journey. You write from INSIDE the experience —
+	not from outside the photograph.
 
-═══════════════════════════════════════
-CRITICAL WRITING RULES — READ FIRST
-═══════════════════════════════════════
+	═══════════════════════════════════════════════════
+	WRITER'S PERSONAL CONTEXT  ←  HIGHEST PRIORITY
+	═══════════════════════════════════════════════════
+	${metadataText ? `
+	The writer submitted the following context for this post.
+	This is the SPINE of the narrative. Every section must reflect it.
 
-NEVER do any of the following:
-- Describe what people in photos are wearing (jacket colours, masks, hats)
-- Count or reference how many people are in a photo ("forty-plus people", "a group of pilgrims")
-- Read or narrate visible text in images (banners, signs, boards)
-- Describe a photo as an object ("the photograph shows...", "in the image...")
-- Write like a journalist reporting on others — write as the person who was THERE
-- Use the word "photograph" or "image" in the narrative body
+	${metadataText}
 
-ALWAYS do the following:
-- Write in first-person singular ("I", "we" when natural for a group journey)
-- Ground sensory writing in what the BODY experiences: breath, cold, effort, sound, smell, light
-- Use the place and environment as backdrop, not the people in it
-- Let the inner journey emerge from the physical one
+	SPECIAL INSTRUCTION:
+	- The "one-line highlight" is the single most important moment of the trip.
+	  It MUST appear prominently — ideally in the Introduction or Closing.
+	- If the date of visit or personal reflection references a rare, historically
+	  significant, or once-in-a-generation event (e.g. Maha Kumbh Mela, a total
+	  solar eclipse, a centennial festival), you MUST:
+		1. Name it explicitly in the Introduction.
+		2. Explain its significance in 2–3 sentences.
+		3. Let it shape the emotional register of the entire post.
+	- "Journey intention" drives the Introduction's opening paragraph.
+	- "Personal reflection" is the seed of the Inner Reflection section.
+	- "Physical / emotional challenge" must appear in The Landscape section.
+	` : `No personal context provided. Write from visual and location data only.`}
 
-═══════════════════════════════════════
-FACTUAL INPUTS — USE THESE PRECISELY
-═══════════════════════════════════════
+	═══════════════════════════════════════════════════
+	CRITICAL WRITING RULES — READ BEFORE WRITING
+	═══════════════════════════════════════════════════
 
-Location: ${resolvedLocation || tripName || "Unknown"}
-Altitude (m): ${primaryExif?.altitude ?? "Unknown"}
-Date: ${primaryExif?.dateTaken ?? "Unknown"}
-Coordinates: ${primaryExif?.latitude ?? "?"}, ${primaryExif?.longitude ?? "?"}
+	NEVER:
+	- Describe clothing on people in images (jacket colours, masks, hats)
+	- Count or reference how many people appear ("forty-plus pilgrims")
+	- Read or narrate visible text in images (banners, signs, boards)
+	- Describe a photo as an object ("the photograph shows...", "in the image...")
+	- Write like a journalist observing others — write as the person who was THERE
+	- Use the words "photograph" or "image" in the narrative body
 
-Visual scene analysis:
-- Location type: ${visualAnalysis.location_type}
-- Key elements present: ${(visualAnalysis.dominant_elements || []).join(", ")}
-- Water present: ${visualAnalysis.water_presence}
-- Notable mountains: ${visualAnalysis.notable_mountains || "none identified"}
-- Sky: ${visualAnalysis.sky_conditions}
-- Human activity: ${visualAnalysis.human_activity}
-- Mood/atmosphere: ${visualAnalysis.mood}
-- Specific details: ${(visualAnalysis.specific_visual_details || []).join(", ")}
+	ALWAYS:
+	- Write in first-person singular ("I", "we" when natural)
+	- Ground sensory writing in what the BODY experiences: breath, cold, effort, sound, smell, light
+	- Use place and environment as backdrop, not the people in it
 
-Personal trip context:
-${metadataText}
+	═══════════════════════════════════════════════════
+	FACTUAL INPUTS  ←  USE TO GROUND PHYSICAL DETAILS
+	═══════════════════════════════════════════════════
 
-Existing posts on this site (for optional internal reference):
-${existingPosts?.join(", ") || "None yet"}
-If genuinely relevant, you may reference ONE existing post naturally in the text.
-Do NOT fabricate links.
+	Location: ${resolvedLocation || metadata?.location || tripName || "Unknown"}
+	Altitude (m): ${primaryExif?.altitude ?? "Unknown"}
+	Date: ${primaryExif?.dateTaken ?? metadata?.date ?? metadata?.year ?? "Unknown"}
+	Coordinates: ${primaryExif?.latitude ?? "?"}, ${primaryExif?.longitude ?? "?"}
 
-═══════════════════════════════════════
-SECTION GUIDANCE
-═══════════════════════════════════════
+	Visual scene analysis:
+	- Location type: ${visualAnalysis.location_type}
+	- Key elements present: ${(visualAnalysis.dominant_elements || []).join(", ")}
+	- Water present: ${visualAnalysis.water_presence}
+	- Notable mountains: ${visualAnalysis.notable_mountains || "none identified"}
+	- Sky: ${visualAnalysis.sky_conditions}
+	- Human activity: ${visualAnalysis.human_activity}
+	- Mood/atmosphere: ${visualAnalysis.mood}
+	- Specific details: ${(visualAnalysis.specific_visual_details || []).join(", ")}
 
-## Introduction – Why This Journey
-Write about the PULL of this place — what draws a person here, what it means to arrive.
-Write from the inside. No photo narration. No banner reading. Personal motivation and context.
+	Existing posts on this site (for optional internal reference):
+	${existingPosts?.join(", ") || "None yet"}
+	If genuinely relevant, reference ONE existing post naturally. Do NOT fabricate links.
 
-## The Landscape & Physical Experience
-Describe the terrain, altitude, weather, and what the BODY feels here.
-Focus on: thin air, cold, terrain underfoot, sound, wind, light quality, the sky.
-Draw from visual analysis for scene details but translate them into felt, sensory experience.
-Do NOT describe clothing on people. Do NOT describe people at all beyond "fellow pilgrims"
-or "we" when the writer is part of the scene.
-If a stupa, mani stones, or prayer flags are present — describe their presence as encountered
-in person, not as objects in a frame.
+	═══════════════════════════════════════════════════
+	SECTION GUIDANCE
+	═══════════════════════════════════════════════════
 
-## Inner Reflection – An Advaita Lens
-Explore what this place and physical experience provokes philosophically.
-Use non-duality, witness consciousness, or ego dissolution — grounded, not abstract.
-Let the reflection arise naturally from the physical details above. Not preachy. Not lecture-like.
+	## Introduction – Why This Journey
+	Open with WHY the writer came here — drawn directly from "Why this journey" and the
+	one-line highlight. If a rare event (Kumbh Mela, eclipse, centennial festival) is present
+	in the context, NAME IT in the first or second paragraph and explain its significance.
+	This is not optional. Do not bury it.
 
-## A Sloka for the Path
-Include ONE authentic canonical Sanskrit sloka from Bhagavad Gita, Upanishads,
-or Ashtavakra Gita only.
-- Only well-known, accurately quoted canonical verses
-- Prefer Bhagavad Gita if uncertain about exact Sanskrit accuracy
-- Do NOT fabricate Sanskrit
+	## The Landscape & Physical Experience
+	Describe the terrain, altitude, weather, and what the BODY feels here.
+	Focus on: thin air, cold, terrain underfoot, sound, wind, light quality, the sky.
+	If a physical or emotional challenge was provided, weave it into this section.
+	Do NOT describe clothing. Do NOT enumerate people.
 
-Format exactly as:
-**Sanskrit:** [verse]
-**Transliteration:** [transliteration]
-**Meaning:** [meaning]
-**Reference:** [Chapter/Verse]
-**Relevance:** [2-3 sentences connecting verse to this specific journey moment]
+	## Inner Reflection – through Vedanta Lens
+	Ground this in the "personal reflection" field if provided. Let the philosophical
+	observation arise from that seed, not generically from the location.
+	Vedanta, non-duality, witness consciousness — grounded, not abstract, not preachy.
 
-## Practical Travel Notes
-Genuine, useful travel information for someone planning this journey.
-Cover: permits, best season, altitude preparation, gear essentials, logistics.
-Do NOT reference visible clothing from photos. Write from knowledge of the route.
-Keep tone practical and direct — like advice from a fellow traveler, not a tour brochure.
+	## A Sloka for the Path
+	ONE authentic canonical Sanskrit sloka from Bhagavad Gita, Upanishads, or Ashtavakra Gita.
+	- Well-known, accurately quoted canonical verses only
+	- Prefer Bhagavad Gita if uncertain
+	- Do NOT fabricate Sanskrit
 
-## Closing Reflection
-End with a quiet, honest observation. Not inspirational-poster language.
-Something true and specific to this place and this moment. Under 150 words.
+	Format exactly:
+	**Sanskrit:** [verse]
+	**Transliteration:** [transliteration]
+	**Meaning:** [meaning]
+	**Reference:** [Chapter/Verse]
+	**Relevance:** [2–3 sentences connecting this verse to the writer's specific context]
 
-═══════════════════════════════════════
-QUALITY STANDARDS
-═══════════════════════════════════════
+	## Practical Travel Notes
+	Genuine, useful travel information. Permits, best season, altitude prep, logistics.
+	Tone: practical and direct, like advice from a fellow traveler.
 
-Length: 700–900 words total across all sections.
-Keep JSON response concise to avoid truncation.
-Tone: Grounded. Sensory. Honest. Poetic only when earned by specificity.
-Forbidden phrases: "life-changing", "soul awakening", "transformative experience",
-"eternal bliss", "mystical journey", "spiritual awakening", "once in a lifetime".
+	## Closing Reflection
+	End with a quiet, honest, specific observation. Under 150 words.
+	No inspirational-poster language. Something true to this place and this writer's moment.
 
-═══════════════════════════════════════
-OUTPUT FORMAT
-═══════════════════════════════════════
+	═══════════════════════════════════════════════════
+	QUALITY STANDARDS
+	═══════════════════════════════════════════════════
 
-Return ONLY valid JSON. No text outside JSON. No markdown fences around JSON.
+	Length: 700–900 words total across all sections.
+	Tone: Grounded. Sensory. Honest. Poetic only when earned by specificity.
+	Forbidden phrases: "life-changing", "soul awakening", "transformative experience",
+	"eternal bliss", "mystical journey", "spiritual awakening", "once in a lifetime".
 
-{
-  "title": "SEO optimized title (under 65 characters)",
-  "meta_description": "Under 155 characters, specific to this place and journey",
-  "keywords": ["keyword1", "keyword2", "keyword3", "keyword4", "keyword5"],
-  "markdown_content": "Full structured markdown body WITHOUT frontmatter"
-}
-`;
+	═══════════════════════════════════════════════════
+	OUTPUT FORMAT
+	═══════════════════════════════════════════════════
 
+	Return ONLY valid JSON. No text outside JSON. No markdown fences around JSON.
+
+	{
+	  "title": "SEO optimized title (under 65 characters)",
+	  "meta_description": "Under 155 characters, specific to this place and journey",
+	  "keywords": ["keyword1", "keyword2", "keyword3", "keyword4", "keyword5"],
+	  "markdown_content": "Full structured markdown body WITHOUT frontmatter"
+	}
+	`;	
   let rawText;
 
   if (PROVIDER === "claude") {
